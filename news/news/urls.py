@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 
 from django.contrib.auth.views import login
 from django.contrib.auth.views import logout_then_login
@@ -24,4 +26,8 @@ urlpatterns = [
     url(r'^', include('links.urls')),
     url(r'^login/$', login, {'template_name': 'login.html'}, name="login"),
     url(r'^logout/$', logout_then_login, name="logout"),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns +=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

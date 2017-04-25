@@ -1,10 +1,12 @@
+{% load static %}
 <html>
 <head>
-  <title>Steel Rumors</title>
-  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css" />
+  <title>Hacker News Clone</title>
+  <!-- <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css" /> -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
 </head>
 <body>
-<h1>Steel Rumors</h1>
+<h1>Hacker News Clone</h1>
 
 {% block content %}
 {% endblock %}
