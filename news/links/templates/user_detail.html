@@ -6,6 +6,9 @@
 <div>
 <b>Bio:</b>
 {{ object.user.userprofile.bio }}
+{% if object.user.username == user.username %}
+<p><a href="{% url 'update' pk=user.id %}">Edit your profile</a></p>
+{% endif %}
 </div>
 
 {% else %}
