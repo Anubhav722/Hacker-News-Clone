@@ -8,9 +8,10 @@
 <ol>
 {% endif %}
 {% for link in object_list %}
-    <li>
+    <li> {{ link.votes }} Votes |
+    <a href="{% url 'detail' pk=link.pk %}"><b>{{ link.title }}</b></a> | 
     <a href="{{ link.url }}">
-      <b>{{ link.title }}</b>
+    Visit link by clicking here :{{ link.title }}
     </a>
     </li>
 {% endfor %}
