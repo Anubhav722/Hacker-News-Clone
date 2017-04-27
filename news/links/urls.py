@@ -5,7 +5,9 @@ from links.views import (LinkListView,
 	UserProfileDetailView, 
 	UserProfileUpdateView, 
 	LinkCreateView,
-	LinkDetailView,)
+	LinkDetailView,
+	LinkUpdateView,
+	LinkDeleteView)
 
 # app_name = 'links'
 urlpatterns = [
@@ -14,4 +16,6 @@ urlpatterns = [
     url(r'^update/(?P<pk>\d+)/$', auth(UserProfileUpdateView.as_view()), name='update'),
     url(r'^create/$', auth(LinkCreateView.as_view()), name='create'),
     url(r'^detail/(?P<pk>\d+)/$', LinkDetailView.as_view(), name='detail'),
+    url(r'^link_update/(?P<pk>\d+)/$', LinkUpdateView.as_view(), name='link_update'),
+    url(r'^link_delete/(?P<pk>\d+)/$', LinkDeleteView.as_view(), name='link_delete'),
 ]

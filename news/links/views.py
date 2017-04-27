@@ -2,8 +2,13 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, UpdateView, CreateView
-from django.core.urlresolvers import reverse
+from django.views.generic import (ListView, 
+	DetailView, 
+	UpdateView, 
+	CreateView,
+	DeleteView,)
+
+from django.core.urlresolvers import reverse, reverse_lazy
 
 from .forms import UserProfileForm, LinkForm
 from .models import Vote, Link, UserProfile
@@ -24,12 +29,12 @@ class UserProfileUpdateView(UpdateView):
 	model = UserProfile
 	form_class = UserProfileForm
 	template_name = "edit_profile.html"
-	success_url = '/'
+	success_url = reverse_lazy('home')
 
 class LinkCreateView(CreateView):
 	model = Link
 	form_class = LinkForm
-	success_url = '/'
+	success_url = reverse_lazy('home')
 	template_name = 'link_form.html'
 
 	def form_valid(self, form):
@@ -47,3 +52,13 @@ class LinkDetailView(DetailView):
 	# def get_object(self):
 	# 	pk = self.kwargs.get('pk')
 	# 	return Link.objects.get(pk=pk)
+
+class LinkUpdateView(UpdateView):
+	model = Link
+	form_class = LinkForm
+	template_name = 'link_form.html'
+
+class LinkDeleteView(DeleteView):
+	model = Link
+	template_name = 'delete_confirm.html'
+	success_url = reverse_lazy('home')
