@@ -9,4 +9,10 @@
   {{ object.description }}
 </div>
 
+{% if object.submitter == user %}
+	<a href="{% url 'link_update' pk=object.pk %}">Edit</a> | 
+	<a href="{% url 'link_delete' pk=object.pk %}">Delete</a>
+{% endif %}
+
+
 {% endblock %}
