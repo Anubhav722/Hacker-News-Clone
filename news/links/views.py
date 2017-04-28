@@ -10,11 +10,19 @@ from django.views.generic import (ListView,
 
 from django.core.urlresolvers import reverse, reverse_lazy
 
+from django_comments.models import Comment
+
 from .forms import UserProfileForm, LinkForm
 from .models import Vote, Link, UserProfile
 # Create your views here.
 
-class LinkListView(ListView):
+class RandomGossipMixin(object):
+	def get_context_data(self, **kwargs):
+		context = super(RandomGossipMixin, self).get_context_data(**kwargs)
+		context[u'randomquip'] = Comment.objects.order_by('?')[0]
+		return context
+
+class LinkListView(RandomGossipMixin, ListView):
 	model = Link
 	template_name = 'link_list.html'
 
@@ -62,3 +70,4 @@ class LinkDeleteView(DeleteView):
 	model = Link
 	template_name = 'delete_confirm.html'
 	success_url = reverse_lazy('home')
+

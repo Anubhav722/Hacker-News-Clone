@@ -32,11 +32,16 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    #'django.contrib.comments',
+    'django.contrib.sites',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django_comments',
+
     'links',
     'registration',
 ]
@@ -138,5 +143,7 @@ APPEND_SLASH = True
 LOGIN_URL=reverse_lazy('login')
 LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGOUT_URL=reverse_lazy('logout')
+
+SITE_ID = 1
 
 

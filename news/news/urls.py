@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^login/$', login, {'template_name': 'login.html'}, name="login"),
     url(r'^logout/$', logout_then_login, name="logout"),
     url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^comments/', include('django_comments.urls')),
 ]
 
 if settings.DEBUG:
