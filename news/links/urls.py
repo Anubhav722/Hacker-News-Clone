@@ -7,7 +7,8 @@ from links.views import (LinkListView,
 	LinkCreateView,
 	LinkDetailView,
 	LinkUpdateView,
-	LinkDeleteView)
+	LinkDeleteView,
+    VoteFormView,)
 
 # app_name = 'links'
 urlpatterns = [
@@ -18,4 +19,5 @@ urlpatterns = [
     url(r'^detail/(?P<pk>\d+)/$', LinkDetailView.as_view(), name='detail'),
     url(r'^link_update/(?P<pk>\d+)/$', LinkUpdateView.as_view(), name='link_update'),
     url(r'^link_delete/(?P<pk>\d+)/$', LinkDeleteView.as_view(), name='link_delete'),
+    url(r'^vote/$', auth(VoteFormView.as_view()), name='vote'),
 ]
