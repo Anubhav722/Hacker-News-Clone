@@ -1,0 +1,12 @@
+  File "rerank.py", line 4
+    from links.models import Link
+       ^
+SyntaxError: invalid syntax
+  File "rerank.py", line 4
+    from links.models import Link
+       ^
+SyntaxError: invalid syntax
+  File "rerank.py", line 4
+    from .models import Link
+       ^
+SyntaxError: invalid syntax
