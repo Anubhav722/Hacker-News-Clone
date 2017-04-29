@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.utils.timezone import now
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Count
@@ -8,8 +9,7 @@ from django.db.models import Count
 
 class LinkVoteCountManager(models.Manager):
 	def get_queryset(self):
-		return super(LinkVoteCountManager, self).get_queryset().annotate(votes = Count('vote')).order_by('-votes')
-
+		return super(LinkVoteCountManager, self).get_queryset().annotate(votes = Count('vote')).order_by('-rank_score', '-votes')
 
 class Link(models.Model):
 	title = models.CharField("Headline", max_length=100)
@@ -24,6 +24,15 @@ class Link(models.Model):
 
 	def __unicode__(self):
 		return self.title
+
+	def set_rank(self):
+		SECS_IN_HOUR = float(60*60)
+		GRAVITY = 1.2
+		delta = now() - self.submitted_on
+		item_hour_age = delta.total_seconds()
+		votes = self.votes - 1
+		self.rank_score = votes / pow((item_hour_age+2), GRAVITY)
+		self.save()
 
 class Vote(models.Model):
 	voter = models.ForeignKey(User)
